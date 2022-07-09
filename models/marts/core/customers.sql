@@ -1,9 +1,9 @@
 with customers as (
-    select * from analytics-engineers-club.coffee_shop.customers
+    select * from {{ source('coffee_shop', 'customers') }}
 ),
 
 orders as (
-    select * from analytics-engineers-club.coffee_shop.orders
+    select * from {{ source('coffee_shop', 'orders') }}
 ),
 
 customer_orders as (
