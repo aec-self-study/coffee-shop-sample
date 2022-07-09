@@ -1,9 +1,9 @@
 with customers as (
-    select * from analytics-engineers-club.coffee_shop.customers
+    select * from {{ ref('stg_coffee_shop__customers') }}
 ),
 
 orders as (
-    select * from analytics-engineers-club.coffee_shop.orders
+    select * from {{ ref('stg_coffee_shop__orders') }}
 ),
 
 customer_orders as (
@@ -17,7 +17,7 @@ customer_orders as (
 
 joined as (
     select
-        customers.id as customer_id,
+        customers.customer_id,
         customers.name,
         customers.email,
         customer_orders.first_order_at,
@@ -25,7 +25,7 @@ joined as (
 
     from customers
     left join customer_orders
-        on customers.id = customer_orders.customer_id
+        using (customer_id)
 )
 
 select * from joined
