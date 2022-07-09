@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: customers
+    description: Primary key
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+      - name: number_of_orders
+        tests:
+          - not_null
